@@ -1,9 +1,10 @@
 {
-  "name": "@tenex/schema-validate",
-  "version": "1.2.1",
+  "name": "@tenex/schema-validator",
+  "version": "0.0.0",
   "description": "Easiest way of running a service ever.",
   "main": "dist/index.js",
   "scripts": {
+    "publish": "git add . ; echo 'enter commit message' & read -p \"Commit description: \" desc; git commit -m \"$desc\" & git push ; npm publish --access public",
     "test": "mocha -r ts-node/register tests/**/*",
     "coverage": "nyc -r lcov -e .ts -x \"*.test.ts\" npm run test",
     "build": "tsc",
