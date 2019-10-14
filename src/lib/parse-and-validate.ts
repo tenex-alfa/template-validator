@@ -1,6 +1,7 @@
 import parseYML from "./parse-yml";
 import _validate, { ErrorMessage as getError } from "./validate";
 import chalk from "chalk";
+import { all as merge } from "deepmerge"
 interface Cofig {
   noExeceptions?: boolean;
 }
@@ -17,7 +18,12 @@ const validate = (
   if (!valid && config && config.noExeceptions) return false;
   else {
     if (!valid) throw new Error(chalk.red(getError()));
-    else return parsedInput;
+    else {
+      const removedQuestionMarked = JSON.parse(JSON.stringify(parsedTemplate).replace(/\?\"/g, "\""));
+      const mergedObject = merge([removedQuestionMarked, parsedInput]);
+      console.log(mergedObject)
+      return parsedInput;
+    }
   }
 };
 
